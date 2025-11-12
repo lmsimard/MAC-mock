@@ -273,9 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       function startExam() {
-        startScreen.style.display = "none";
-        imgElement.style.display = "block";
-        finishedScreen.style.display = "none";
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("exam-image").style.display = "block";
+        document.getElementById("finished-screen").style.display = "none";
         currentIndex = 0;
         showImage(currentIndex);
         interval = setInterval(() => {
@@ -317,5 +317,6 @@ window.addEventListener('resize', alignStickyRight);
 
 </body>
 </html>   
+
 
 
