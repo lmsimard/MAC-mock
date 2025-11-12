@@ -32,6 +32,8 @@
   <div id="results"></div>
   <p id="score"></p>
   <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwmzMUzyyJg1pnk4Pbu3vOy_P2B6JXApMvzpSbtFfVrVceIznzYlaQqtXiDdgF6aI5UjQ/exec";
+    const userID = localStorage.getItem("userID") || "unknown_user";
     // THIS IS THE PLACE FOR INPUT OF CORRECT ANSWERS. Case insensitive correction. 
     const correctAnswers = {
       Q01: "medial umbilical ligament",
@@ -59,32 +61,39 @@
       Q23: "ducks",
       Q24: "duck"
     };
-    const resultsList = document.getElementById('results');
-    let total = 0;
-    let score = 0;
-    new URLSearchParams(window.location.search).forEach((value, name) => {
-      total++;
-      const p = document.createElement('p');
-      const userAnswer = value.trim().toLowerCase();
-    let acceptedAnswers = correctAnswers[name];
-    if (!acceptedAnswers) acceptedAnswers = [];
-    if (typeof acceptedAnswers === "string") {
-      acceptedAnswers = [acceptedAnswers];
-    }
-    acceptedAnswers = acceptedAnswers.map(a => a.trim().toLowerCase()).filter(a => a !== "");
-    const isCorrect = acceptedAnswers.includes(userAnswer);
-    if (isCorrect) {
-      score++;
-      p.innerHTML = `${name}: ${value} <span class="correct">✔ Correct</span>`;
-    } else if (acceptedAnswers.length === 0) {
-      p.innerHTML = `${name}: ${value} <span class="black">(no correct answer stored)</span>`;
-    } else {
-      p.innerHTML = `${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${acceptedAnswers.join(" OR ")})`;
-    }
-    resultsList.appendChild(p);
-  });
-  document.getElementById('score').textContent = `Final Score: ${score} / ${total}`;
-  </script>
+const urlParams = new URLSearchParams(window.location.search);
+const answers = {};
+let score=0;
+urlParams.forEach((value,name)=>{
+  answers[name]=value.trim();
+  let accepted = correctAnswers[name];
+  if(!accepted) accepted=[];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted = accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  if(accepted.includes(value.trim().toLowerCase())) score++;
+});
+const resultsList = document.getElementById("results");
+Object.entries(answers).forEach(([name,value])=>{
+  const p=document.createElement("p");
+  let accepted = correctAnswers[name] || [];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted=accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  const isCorrect = accepted.includes(value.trim().toLowerCase());
+  if(isCorrect) p.innerHTML=`${name}: ${value} <span class="correct">✔ Correct</span>`;
+  else if(accepted.length===0) p.innerHTML=`${name}: ${value} <span>(no correct answer stored)</span>`;
+  else p.innerHTML=`${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${accepted.join(" OR ")})`;
+  resultsList.appendChild(p);
+});
+document.getElementById("score").textContent=`Final Score: ${score} / ${Object.keys(answers).length}`;
+// Send to Google Sheets
+fetch(scriptURL,{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({userID,score,answers})
+})
+.then(res=>console.log("✅ Results sent"))
+.catch(err=>console.error("❌ Error sending results:",err));
+</script>
   <hp class="line black">Thank you for completing this mock exam! Good luck on your exam! :))</hp>
   <a href="index.html"><small>Back to mock exam</small></a>
   <footer>
