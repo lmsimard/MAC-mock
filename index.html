@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "error_page.html";
       return;
     }
-    if (input.trim() === correctPassword) {
+    if (input.trim().toLowerCase() === correctPassword) {
       passwordCorrect = true;
       document.body.style.display = "block";
     } else {
@@ -317,4 +317,5 @@ window.addEventListener('resize', alignStickyRight);
 
 </body>
 </html>   
+
 
