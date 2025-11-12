@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   while (true) {
     const initials = prompt("Enter your 2 initials (e.g., AB):")?.trim().toUpperCase();
     const phone = prompt("Enter the last 6 digits of your phone number:")?.trim();
-    const dob = prompt("Enter your date of birth in YYYYMMDD format:")?.trim();
+    const dob = prompt("Enter your date of birth in DDMMYYYY format:")?.trim();
 
     if (!initials || initials.length !== 2) {
       alert("Invalid initials. Please enter exactly 2 letters.");
@@ -317,3 +317,4 @@ window.addEventListener('resize', alignStickyRight);
 
 </body>
 </html>   
+
