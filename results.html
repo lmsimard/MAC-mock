@@ -9,39 +9,32 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
   <style>
-    .line { font-family: "Inter", sans-serif; font-size: 20px; margin: 5px 0; }
+    .line {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      margin: 5px 0;
+    }
     .correct { color: rgb(0, 133, 0); font-weight: bold; }
     .incorrect { color: rgb(159, 0, 27); font-weight: bold; }
-    .black { color: black; }
+    .black {color: black}
   </style>
 </head>
 <body>
-  <header>
-    <div class="header_logo">
-      <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width="80px">
-    </div>
-    <div class="header_title">
-      <h1>MAC Mock Bellringer - Results</h1>
-      <h3><i>version 3.2</i></h3>
-    </div>
-  </header>
-
+      <header>
+        <div class = "header_logo">
+            <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width = 80px>
+        </div>
+        <div class="header_title">
+            <h1>MAC Mock Bellringer - Results</h1>
+            <h3><i>version 3.2</i></h3>
+        </div>
+    </header>
   <div id="results"></div>
   <p id="score"></p>
-  <p class="line black">Thank you for completing this mock exam! Good luck on your exam! :))</p>
-  <a href="index.html"><small>Back to mock exam</small></a>
-
-  <footer>
-    <h3>© 2025 MSS Anatomy Club</h3>
-    <h3>contact [add email?] for bugs/questions/suggestions</h3>
-  </footer>
-
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    console.log("✅ Results page loaded");
-
-    // --- 1) Correct answers ---
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwmzMUzyyJg1pnk4Pbu3vOy_P2B6JXApMvzpSbtFfVrVceIznzYlaQqtXiDdgF6aI5UjQ/exec";
+    const userID = localStorage.getItem("userID") || "unknown_user";
+    // THIS IS THE PLACE FOR INPUT OF CORRECT ANSWERS. Case insensitive correction. 
     const correctAnswers = {
       Q01: "medial umbilical ligament",
       Q02: ["monday", "mon", "carré lombaire", "quadratus lumborum"],
@@ -68,81 +61,46 @@
       Q23: "ducks",
       Q24: "duck"
     };
+const urlParams = new URLSearchParams(window.location.search);
+const answers = {};
+let score=0;
+urlParams.forEach((value,name)=>{
+  answers[name]=value.trim();
+  let accepted = correctAnswers[name];
+  if(!accepted) accepted=[];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted = accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  if(accepted.includes(value.trim().toLowerCase())) score++;
+});
+const resultsList = document.getElementById("results");
+Object.entries(answers).forEach(([name,value])=>{
+  const p=document.createElement("p");
+  let accepted = correctAnswers[name] || [];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted=accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  const isCorrect = accepted.includes(value.trim().toLowerCase());
+  if(isCorrect) p.innerHTML=`${name}: ${value} <span class="correct">✔ Correct</span>`;
+  else if(accepted.length===0) p.innerHTML=`${name}: ${value} <span>(no correct answer stored)</span>`;
+  else p.innerHTML=`${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${accepted.join(" OR ")})`;
+  resultsList.appendChild(p);
+});
+document.getElementById("score").textContent=`Final Score: ${score} / ${Object.keys(answers).length}`;
 
-    // --- 2) Get userID from localStorage ---
-    const storedUserID = localStorage.getItem("userID") || "unknown_user";
-    console.log("User ID:", storedUserID);
+// Send to Google Sheets
+fetch(scriptURL,{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({userID,score,answers})
+})
+.then(res=>console.log("✅ Results sent"))
+.catch(err=>console.error("❌ Error sending results:",err));
+</script>
 
-    // --- 3) Scoring ---
-    const resultsList = document.getElementById("results");
-    const scoreElem = document.getElementById("score");
-    let total = 0;
-    let score = 0;
-    const answersObject = {};
-
-    const params = new URLSearchParams(window.location.search);
-    if (params.toString() === "") {
-      resultsList.innerHTML = "<p>No answers detected. Please complete the exam first.</p>";
-      return;
-    }
-
-    params.forEach((value, name) => {
-      total++;
-      const p = document.createElement("p");
-      const userAnswer = value.trim().toLowerCase();
-      let acceptedAnswers = correctAnswers[name];
-
-      if (!acceptedAnswers) acceptedAnswers = [];
-      if (typeof acceptedAnswers === "string") acceptedAnswers = [acceptedAnswers];
-      acceptedAnswers = acceptedAnswers.map(a => a.trim().toLowerCase()).filter(a => a !== "");
-
-      const isCorrect = acceptedAnswers.includes(userAnswer);
-      answersObject[name] = value;
-
-      if (isCorrect) {
-        score++;
-        p.innerHTML = `${name}: ${value} <span class="correct">✔ Correct</span>`;
-      } else if (acceptedAnswers.length === 0) {
-        p.innerHTML = `${name}: ${value} <span class="black">(no correct answer stored)</span>`;
-      } else {
-        p.innerHTML = `${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${acceptedAnswers.join(" OR ")})`;
-      }
-
-      resultsList.appendChild(p);
-    });
-
-    scoreElem.textContent = `Final Score: ${score} / ${total}`;
-
-    const sheetURL = "https://script.google.com/macros/s/AKfycbz1GbU8A2YAn3_KoWWOuHBHSbc4RXapPz5e5vcDuAs2j7OaMmDxO0k2kRKQvJpfJxWYWQ/exec";
-    console.log("Sending data to Google Sheets...");
-
-    fetch(sheetURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userID: storedUserID,
-        score: score,
-        answers: answersObject
-      })
-    })
-    .then(res => res.text())
-    .then(text => {
-      console.log("Google response:", text);
-      try {
-        const data = JSON.parse(text);
-        console.log("✅ Upload result:", data);
-      } catch (e) {
-        console.warn("⚠ Non-JSON response from Apps Script:", text);
-      }
-    })
-    .catch(err => {
-      console.error("❌ Upload error:", err);
-    });
-
-  });
-  </script>
+  <hp class="line black">Thank you for completing this mock exam! Good luck on your exam! :))</hp>
+  <a href="index.html"><small>Back to mock exam</small></a>
+  <footer>
+    <h3>© 2025 MSS Anatomy Club</h3>
+    <h3>contact [add email?] for bugs/questions/suggestions</h3>
+  </footer>
 </body>
 </html>
-
-
-
