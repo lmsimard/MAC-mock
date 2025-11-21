@@ -13,80 +13,37 @@
     </style>
 </head>
 <body>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // PW
-  const correctPassword = "cingulategyrus";
-  let passwordCorrect = false;
-  while (!passwordCorrect) {
-    const input = prompt("Please enter the password given during the Zoom to access this page:");
-    if (input === null) {
-      alert("Access cancelled");
-      window.location.href = "error_page.html";
-      return;
-    }
-    if (input.trim().toLowerCase() === correctPassword) {
-      passwordCorrect = true;
-      document.body.style.display = "block";
-    } else {
-      alert("Access denied: wrong password — please try again.");
-    }
-  }
-  // USER ID
-  let userID = "";
-  while (true) {
-    const initials = prompt("Enter your 2 initials (e.g., AB):")?.trim().toUpperCase();
-    const phone = prompt("Enter the last 6 digits of your phone number:")?.trim();
-    const dob = prompt("Enter your date of birth in DDMMYYYY format:")?.trim();
-
-    if (!initials || initials.length !== 2) {
-      alert("Invalid initials. Please enter exactly 2 letters.");
-      continue;
-    }
-    if (!phone || !/^\d{6}$/.test(phone)) {
-      alert("Invalid phone number. Please enter exactly 6 digits.");
-      continue;
-    }
-    if (!dob || !/^\d{8}$/.test(dob)) {
-      alert("Invalid date of birth. Please use YYYYMMDD format.");
-      continue;
-    }
-    userID = `${initials}${phone}${dob}`;
-    console.log("Generated userID:", userID);
-    localStorage.setItem("userID", userID);
-    break;
-  }
-});
-</script>
-<header>
+    <header>
   <div class="header_logo">
     <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width="80px">
   </div>
   <div class="header_title">
     <h1>MAC Mock Bellringer</h1>
-    <h3><i>version 3.1</i></h3>
+    <h3><i>version 3.2</i></h3>
   </div>
-</header>
-<div class="grid-container">
-  <div class="grid-child purple">
-    <form action="results.html" method="GET">
-      <br>
-      <p>Enter your answers using the answer form below. They will be corrected automatically.</p>
-      <p>Each image is associated with a station and shown on the right for a set time. Do NOT refresh the page.</p>
-      <hr/>
-      <div>
-        <h4>Station 1</h4>
+    </header>
+    <div class="grid-container">
+<!-- PURPLE = PANEL ON THE LEFT (QUESTIONS + SUBMIT BUTTON) -->
+        <div class="grid-child purple">
+            <form action="results.html" method="GET">
+                <br>
+                <p>Enter your answers using the answer form below. They will be corrected automatically.</p>
+                <p>Each image is associated with a station and shown on the right for a set time. Do NOT refresh the page.</p>
+                <hr/>   
+<!-- QUESTIONS SECTION LINE 33-188 INCL. -->
         <div>
-          <label for="Q01" class="line red">1. Identify the landmark indicated by the pin.</label>
-          <br>
-          <input name="Q01" id="Q01" type="text" required>
+            <h4>Station 1</h4>
+            <div>
+                <label for="Q01" class="line red">1. Identify the landmark indicated by the pin. / Identifiez le [...] + ajouter les versions en FR des questions subséquentes aussi. </label>
+                <br>
+                <input name="Q01" id="Q01" type="text" required>
+            </div>
+            <div>
+                <label for="Q02" class="line blue">2. Identify the neurovascular structure indicated by the pin.</label>
+                <br>
+                <input name="Q02" id="Q02" type="text" required>
+            </div>
         </div>
-        <div>
-          <label for="Q02" class="line blue">2. Identify the neurovascular structure indicated by the pin.</label>
-          <br>
-          <input name="Q02" id="Q02" type="text" required>
-        </div>
-      </div>
         <div>
             <h4>Station 2</h4>
             <div>
@@ -229,13 +186,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 <br>
                 <input name="Q24" id="Q24" type="text">
             </div> 
-      <br>
+        </div>
+<!-- SUBMIT EXAM BUTTON -->
+        <br>
       <button id="submitExam" type="submit">
         <p><strong>End</strong> the mock exam + <strong>correct</strong> your answers</p>
       </button>
       <br>
     </form>
   </div>
+<!-- GREEN = PANEL ON THE RIGHT (PHOTOS + START BUTTON) -->
   <div class="grid-child green">
     <br>
     <div class="exam-container">
@@ -262,16 +222,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const displayTime = 3000; 
       const imgElement = document.getElementById("exam-image");
       const finishedScreen = document.getElementById("finished-screen");
-      const startScreen = document.getElementById("startScreen");
+      const startScrcingueen = document.getElementById("startScreen");
       const startButton = document.getElementById("startButton");
       const submitExam = document.getElementById("submitExam");
       let currentIndex = 0;
       let interval;
-
       function showImage(index) {
         imgElement.src = images[index];
       }
-
       function startExam() {
         document.getElementById("startScreen").style.display = "none";
         document.getElementById("exam-image").style.display = "block";
@@ -296,27 +254,68 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+// PASSWORD FUNCTION
+    const correctPassword = "cingulategyrus";
+    let passwordCorrect = false;
+    while (!passwordCorrect) {
+      const input = prompt("Please enter the password given during the Zoom to access this page:");
+      if (input === null) {
+        alert("Access cancelled");
+        window.location.href = "error_page.html";
+        return;
+      }
+      if (input.trim().toLowerCase() === correctPassword) {
+        passwordCorrect = true;
+        document.body.style.display = "block";
+      } else {
+        alert("Access denied: wrong password — please try again.");
+      }
+    }
+// (hopefully unique enough) USER ID CREATION FUNCTION
+    let userID = "";
+    while (true) {
+      const initials = prompt("Enter your 2 initials (AB format):")?.trim().toUpperCase();
+      const phone = prompt("Enter the last 4 digits of your phone number (#### format):")?.trim();
+      const dob = prompt("Enter your month and year of birth (MMYYYY format):")?.trim();
+      if (!initials || initials.length !== 2) {
+        alert("Invalid initials. Please enter exactly 2 letters (AB format).");
+        continue;
+      }
+      if (!phone || !/^\d{4}$/.test(phone)) {
+        alert("Invalid phone number. Please enter exactly 4 digits (#### format).");
+        continue;
+      }
+      if (!dob || !/^\d{6}$/.test(dob)) {
+        alert("Invalid date of birth. Please enter exactly 6 digits (MMYYYY format).");
+        continue;
+      }
+      userID = `${initials}${phone}${dob}`;
+      console.log("Generated userID:", userID);
+      localStorage.setItem("userID", userID);
+      break;
+    }
+  });
+</script>
+<!-- FOOTER -->
 <footer>
   <h3>© 2025 MSS Anatomy Club</h3>
   <h3>contact [add email?] for bugs/questions/suggestions</h3>
 </footer>
-<script>
-function alignStickyRight() {
-  const header = document.querySelector('header');
-  const rightCol = document.querySelector('.grid-child.green');
-  if (!rightCol) return;
-  const headerHeight = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
-  const gap = 12;
-  const topOffset = headerHeight + gap;
-  rightCol.style.top = topOffset + 'px';
-  rightCol.style.maxHeight = `calc(100vh - ${topOffset}px)`;
-}
-window.addEventListener('load', alignStickyRight);
-window.addEventListener('resize', alignStickyRight);
+<script>  
+  function alignStickyRight() {
+    const header = document.querySelector('header');
+    const rightCol = document.querySelector('.grid-child.green');
+    if (!rightCol) return;
+    const headerHeight = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+    const gap = 12;
+    const topOffset = headerHeight + gap;
+    rightCol.style.top = topOffset + 'px';
+    rightCol.style.maxHeight = `calc(100vh - ${topOffset}px)`;
+  }
+  window.addEventListener('load', alignStickyRight);
+  window.addEventListener('resize', alignStickyRight);
 </script>
-
 </body>
 </html>   
-
-
-
