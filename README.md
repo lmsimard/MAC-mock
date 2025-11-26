@@ -1,6 +1,8 @@
 # MAC-mock
 MSS Anatomy Club mock bellringer platform
 
+## password used for test versions: cingulate
+
 ## version hx:
 - versions 1 and 2 were two v different basic drafts, have been discarded
 - [2025-10-20] 3.1 --> shown during MAC tech meeting
