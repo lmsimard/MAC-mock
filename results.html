@@ -9,6 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      min-height: 100vh;
+    }
     .line {
       font-family: "Inter", sans-serif;
       font-size: 20px;
@@ -17,9 +24,20 @@
     .correct { color: rgb(0, 133, 0); font-weight: bold; }
     .incorrect { color: rgb(159, 0, 27); font-weight: bold; }
     .black {color: black}
+    .header-container {
+      padding-top: 16px; /* adjust for white space above header */
+    }
+    .results-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 85%;
+      margin-left: 0;
+    }
   </style>
 </head>
 <body>
+  <div class="header-container">
       <header>
         <div class = "header_logo">
             <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width = 80px>
@@ -29,10 +47,14 @@
             <h3><i>version 3.2</i></h3>
         </div>
     </header>
-  <div id="results"></div>
-  <p id="score"></p>
+  </div>
+
+  <div class="results-container">
+    <div id="results"></div>
+    <p id="score"></p>
+  </div>
+
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbx5XPhhnpcsFQ-bDNSDTTxQpYUQ82pBCo8mxqCfZZeFQWhTpG4YfQWXT9qHYBOku4m5GA/exec";
     const userID = localStorage.getItem("userID") || "unknown_user";
     // THIS IS THE PLACE FOR INPUT OF CORRECT ANSWERS. Case insensitive correction. 
     const correctAnswers = {
@@ -49,7 +71,7 @@
       Q11: "c c c c c c",
       Q12: "C c",
       Q13: "",
-      Q14: "$spec*al ch@r#cters",
+      Q14: "$pec*al ch@r#cters",
       Q15: "*7452o5434",
       Q16: ["duckssssssss", "multiple ducks"],
       Q17: "ducksssssss",
@@ -84,19 +106,35 @@ Object.entries(answers).forEach(([name,value])=>{
   else p.innerHTML=`${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${accepted.join(" OR ")})`;
   resultsList.appendChild(p);
 });
-document.getElementById("score").textContent=`Final Score: ${score} / ${Object.keys(answers).length}`;
+document.getElementById("score").textContent=`Your final Score is ${score} / ${Object.keys(answers).length}. Thank you for completing this mock bellringer and good luck on your exam! :))`;
 
-// Send to Google Sheets
-fetch(scriptURL,{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({userID,score,answers})
-})
-.then(res=>console.log("✅ Results sent"))
-.catch(err=>console.error("❌ Error sending results:",err));
+console.log("📤 Sending results to Google Apps Script…");
+
+// 1) Ensure Q01–Q24 exist and fill missing answers
+for (let i = 1; i <= 24; i++) { // HERE IT'S 24 BC OF THE NUMBER OF QUESTIONS IN THE MOCK EXAM
+  const key = "Q" + String(i).padStart(2, "0");
+  if (!answers.hasOwnProperty(key) || answers[key].trim() === "") {
+    answers[key] = "NONE ENTERED";
+  }
+}
+
+// 2) Now encode AFTER fixing empty answers
+const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
+
+// 3) NOW construct the URL
+const url =
+  "https://script.google.com/macros/s/AKfycbzEuIrKlO3b_7KICEDIGxKFIii28dMV5AegHHHQYEOdQlkKBS19NGFhrDAGNxgJVaeS_A/exec" +
+  `?userID=${encodeURIComponent(userID)}` +
+  `&score=${encodeURIComponent(score)}` +
+  `&answers=${encodedAnswers}`;
+
+// 4) Send to Google Apps Script (which will send to the Google Sheets https://docs.google.com/spreadsheets/d/1g1EtjZEZH0Ahy_srABgM08HI03PrPXroFNoO58UzDMs/edit?usp=sharing)
+fetch(url, { method: "GET" })
+  .then(res => res.text())
+  .then(txt => console.log("Response:", txt))
+  .catch(err => console.error(err));
+
 </script>
-
-  <hp class="line black">Thank you for completing this mock exam! Good luck on your exam! :))</hp>
   <a href="index.html"><small>Back to mock exam</small></a>
   <footer>
     <h3>© 2025 MSS Anatomy Club</h3>
@@ -104,6 +142,3 @@ fetch(scriptURL,{
   </footer>
 </body>
 </html>
-
-
-
