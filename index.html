@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- HEAD BEGINS -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,295 +11,392 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <style>
-        body{ display: none; }
+      #mainContent {
+        display: none;
+      }
     </style>
 </head>
+<!-- HEAD ENDS -->
+
+<!-- BODY BEGINS -->
 <body>
+  <div id="loginOverlay">
+<!-- PASSWORD -->
+      <div id="passwordStep" style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #11789a;;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;">
+        <h1>MAC Mock Bellringer</h1>
+        <br>
+        <br>
+        <br>
+        <h2>Enter the password provided during the Zoom to access the exam.</h2>
+        <br>
+        <input type="password" id="passwordInput" placeholder="Password">
+        <br>
+        <button id="password_val_Button" class="validate_button" type="button"> <p><strong> VALIDATE AND CONTINUE </strong></p></button>
+      </div>
+<!-- USERNAME STEPS -->
+      <div id="userStep" style="position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #11789a;;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;">
+        <h1>MAC Mock Bellringer</h1>
+        <br>
+        <br>
+        <br>
+        <h2>Enter your user information.</h2>
+        <br>
+        <input type="text" id="initialsInput" placeholder="Initials (AB)" maxlength="2">
+        <input type="text" id="phoneInput" placeholder="Last 4 digits of phone" maxlength="4">
+        <input type="text" id="dobInput" placeholder="Birth MMYYYY" maxlength="6">
+        <br>
+        <button id="username_val_Button" class="validate_button" type="button"> <p><strong> VALIDATE AND CONTINUE </strong></p></button>
+      </div>
+    </div>
+  <div id="mainContent"></div>
+    <!-- STICKY HEADER [visual only] -->
     <header>
-  <div class="header_logo">
-    <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width="80px">
-  </div>
-  <div class="header_title">
-    <h1>MAC Mock Bellringer</h1>
-    <h3><i>version 3.2</i></h3>
-  </div>
+      <div class="header_logo">
+        <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width="80px">
+      </div>
+      <div class="header_title">
+        <h1>MAC Mock Bellringer</h1>
+        <h3><i>version 3.2</i></h3>
+      </div>
     </header>
     <div class="grid-container">
-<!-- PURPLE = PANEL ON THE LEFT (QUESTIONS + SUBMIT BUTTON) -->
-        <div class="grid-child purple">
-            <form action="results.html" method="GET">
-                <br>
-                <p>Enter your answers using the answer form below. They will be corrected automatically.</p>
-                <p>Each image is associated with a station and shown on the right for a set time. Do NOT refresh the page.</p>
-                <hr/>   
-<!-- QUESTIONS SECTION LINE 33-188 INCL. -->
+  <!-- PURPLE = PANEL ON THE LEFT (QUESTIONS + SUBMIT BUTTON) -->
+      <div class="grid-child purple">
+        <form id="examForm" action="results.html" method="GET">
+        <br>
+        <p>Enter your answers using the answer form below. They will be corrected automatically once you submit all of them at the end of the exam.</p>
+        <p>Each image is associated with a station and shown on the right for a set time. Do NOT refresh the page.</p>
+        <hr/>  
+  <!-- QUESTIONS SECTION LINE 33-188 INCL. -->
         <div>
+          <div>
             <h4>Station 1</h4>
             <div>
-                <label for="Q01" class="line red">1. Identify the landmark indicated by the pin. / Identifiez le [...] + ajouter les versions en FR des questions subséquentes aussi. </label>
-                <br>
-                <input name="Q01" id="Q01" type="text" required>
+              <label for="Q01" class="line red">1. Identify the landmark indicated by the pin. / Identifiez le [...] + ajouter les versions en FR des questions subséquentes aussi. </label>
+              <br>
+              <input name="Q01" id="Q01" type="text">
             </div>
             <div>
-                <label for="Q02" class="line blue">2. Identify the neurovascular structure indicated by the pin.</label>
-                <br>
-                <input name="Q02" id="Q02" type="text" required>
+              <label for="Q02" class="line blue">2. Identify the neurovascular structure indicated by the pin.</label>
+              <br>
+              <input name="Q02" id="Q02" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 2</h4>
             <div>
-                <label for="Q03" class= "line red">3. Identify the structure indicated by the pin (be specific).</label>
-                <br>
-                <input name="Q03" id="Q03" type="text">
+              <label for="Q03" class= "line red">3. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q03" id="Q03" type="text">
             </div>
             <div>
-                <label for="Q04" class= "line blue">4. What is the embryological origin of the structure indicated by the pin?</label>
-                <br>
-                <input name="Q04" id="Q04" type="text">
+              <label for="Q04" class= "line blue">4. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q04" id="Q04" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 3</h4>
             <div>
-                <label for="Q05" class= "line red">5. Identify the bony structure indicated by the pin.</label>
-                <br>
-                <input name="Q05" id="Q05" type="text">
+              <label for="Q05" class= "line red">5. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q05" id="Q05" type="text">
             </div>
             <div>
-                <label for="Q06" class= "line blue">6. Identify the landmarked indicated by the pin.</label>
-                <br>
-                <input name="Q06" id="Q06" type="text">
+              <label for="Q06" class= "line blue">6. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q06" id="Q06" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 4</h4>
             <div>
-                <label for="Q07" class= "line red">7. Identify the landmark indicated by the pin.</label>
-                <br>
-                <input name="Q07" id="Q07" type="text">
+              <label for="Q07" class= "line red">7. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q07" id="Q07" type="text">
             </div>
             <div>
-                <label for="Q08" class= "line blue">8. Identify the neurovascular structure indicated by the pin.</label>
-                <br>
-                <input name="Q08" id="Q08" type="text">
+              <label for="Q08" class= "line blue">8. Identify the neurovascular structure indicated by the pin.</label>
+              <br>
+              <input name="Q08" id="Q08" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 5</h4>
             <div>
-                <label for="Q09" class= "line red">9. Identify the structure indicated by the pin (be specific).</label>
-                <br>
-                <input name="Q09" id="Q09" type="text">
+              <label for="Q09" class= "line red">9. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q09" id="Q09" type="text">
             </div>
             <div>
-                <label for="Q10" class= "line blue">10. What is the embryological origin of the structure indicated by the pin?</label>
-                <br>
-                <input name="Q10" id="Q10" type="text">
+              <label for="Q10" class= "line blue">10. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q10" id="Q10" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 6</h4>
             <div>
-                <label for="Q11" class= "line red">11. Identify the bony structure indicated by the pin.</label>
-                <br>
-                <input name="Q11" id="Q11" type="text">
+              <label for="Q11" class= "line red">11. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q11" id="Q11" type="text">
             </div>
             <div>
-                <label for="Q12" class= "line blue">12. Identify the landmarked indicated by the pin.</label>
-                <br>
-                <input name="Q12" id="Q12" type="text">
+              <label for="Q12" class= "line blue">12. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q12" id="Q12" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 7</h4>
             <div>
-                <label for="Q13" class= "line red">13. Identify the landmark indicated by the pin.</label>
-                <br>
-                <input name="Q13" id="Q13" type="text">
+              <label for="Q13" class= "line red">13. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q13" id="Q13" type="text">
             </div>
             <div>
-                <label for="Q14" class= "line blue">14. Identify the neurovascular structure indicated by the pin.</label>
-                <br>
-                <input name="Q14" id="Q14" type="text">
+              <label for="Q14" class= "line blue">14. Identify the neurovascular structure indicated by the pin.</label>
+              <br>
+              <input name="Q14" id="Q14" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 8</h4>
             <div>
-                <label for="Q15" class= "line red">15. Identify the structure indicated by the pin (be specific).</label>
-                <br>
-                <input name="Q15" id="Q15" type="text">
+              <label for="Q15" class= "line red">15. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q15" id="Q15" type="text">
             </div>
             <div>
-                <label for="Q16" class= "line blue">16. What is the embryological origin of the structure indicated by the pin?</label>
-                <br>
-                <input name="Q16" id="Q16" type="text">
+              <label for="Q16" class= "line blue">16. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q16" id="Q16" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 9</h4>
             <div>
-                <label for="Q17" class= "line red">17. Identify the bony structure indicated by the pin.</label>
-                <br>
-                <input name="Q17" id="Q17" type="text">
+              <label for="Q17" class= "line red">17. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q17" id="Q17" type="text">
             </div>
             <div>
-                <label for="Q18" class= "line blue">18. Identify the landmarked indicated by the pin.</label>
-                <br>
-                <input name="Q18" id="Q18" type="text">
+              <label for="Q18" class= "line blue">18. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q18" id="Q18" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 10</h4>
             <div>
-                <label for="Q19" class= "line red">19. Identify the landmark indicated by the pin.</label>
-                <br>
-                <input name="Q19" id="Q19" type="text">
-            </div>
-            <div>
+              <label for="Q19" class= "line red">19. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q19" id="Q19" type="text">
+              </div>
+              <div>
                 <label for="Q20" class= "line blue">20. Identify the neurovascular structure indicated by the pin.</label>
                 <br>
                 <input name="Q20" id="Q20" type="text">
-            </div>
-        </div>
-        <div>
+              </div>
+          </div>
+          <div>
             <h4>Station 11</h4>
             <div>
-                <label for="Q21" class= "line red">21. Identify the structure indicated by the pin (be specific).</label>
-                <br>
-                <input name="Q21" id="Q21" type="text">
+              <label for="Q21" class= "line red">21. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q21" id="Q21" type="text">
             </div>
             <div>
-                <label for="Q22" class= "line blue">22. What is the embryological origin of the structure indicated by the pin?</label>
-                <br>
-                <input name="Q22" id="Q22" type="text">
+              <label for="Q22" class= "line blue">22. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q22" id="Q22" type="text">
             </div>
-        </div>
-        <div>
+          </div>
+          <div>
             <h4>Station 12</h4>
             <div>
-                <label for="Q23" class= "line red">23. Identify the bony structure indicated by the pin.</label>
-                <br>
-                <input name="Q23" id="Q23" type="text">
+              <label for="Q23" class= "line red">23. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q23" id="Q23" type="text">
             </div>
             <div>
-                <label for="Q24" class= "line blue">24. Identify the landmarked indicated by the pin.</label>
-                <br>
-                <input name="Q24" id="Q24" type="text">
+              <label for="Q24" class= "line blue">24. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q24" id="Q24" type="text">
             </div> 
+          </div>
         </div>
-<!-- SUBMIT EXAM BUTTON -->
+  <!-- SUBMIT EXAM BUTTON -->
+        <button id="submitExam" type="submit">
+          <p><strong>End</strong> the mock exam + <strong>correct</strong> your answers</p>
+        </button>
         <br>
-      <button id="submitExam" type="submit">
-        <p><strong>End</strong> the mock exam + <strong>correct</strong> your answers</p>
-      </button>
-      <br>
-    </form>
-  </div>
-<!-- GREEN = PANEL ON THE RIGHT (PHOTOS + START BUTTON) -->
-  <div class="grid-child green">
-    <br>
-    <div class="exam-container">
-      <div id="startScreen">
-        <p class="start_instructions_in_green_column">Click the button below to begin the test. No pause is possible after starting.</p>
+        </form>
+      </div>
+  <!-- GREEN = PANEL ON THE RIGHT (PHOTOS + START BUTTON) -->
+      <div class="grid-child green">
         <br>
-        <button id="startButton" class="start_button" type="button"><p><strong>START</strong></p></button>
+        <div class="exam-container">
+          <div id="startScreen">
+            <p class="start_instructions_in_green_column">Click the button below to begin the test. No pause is possible after starting.</p>
+            <button id="startButton" class="start_button" type="button"><p><strong>START</strong></p></button>
+          </div>
+          <div>
+            <img id="exam-image" src="" alt="Exam Image">
+          </div>
+          <div id="finished-screen">
+            <p class="end_instructions_in_green_column">✅ Exam Finished: <br><br> This screen will remain for 60 seconds. Then, if you haven't clicked submit yet, the form will automatically be submitted.</p>
+          </div>
       </div>
-      <div>
-        <img id="exam-image" src="" alt="Exam Image">
-      </div>
-      <div id="finished-screen">
-        <p class="end_instructions_in_green_column">✅ Exam Finished: <br><br> This screen will remain for 60 seconds. Then, if you haven't clicked submit yet, the form will automatically be submitted.</p>
-      </div>
+      <script>
+        const images = [
+          "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg",
+          "https://cdn.britannica.com/92/100692-050-5B69B59B/Mallard.jpg",
+          "https://hips.hearstapps.com/hmg-prod/images/four-ducklings-on-grass-royalty-free-image-1732103736.jpg?crop=0.670xw:1.00xh;0.0830xw,0&resize=640:*",
+          "https://www.ducks.ca/assets/2022/04/20200316_duckling2-small-1000x678-c-default.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg"
+        ];
+        const displayTime = 3000; 
+        const imgElement = document.getElementById("exam-image");
+        const finishedScreen = document.getElementById("finished-screen");
+        const startScreen = document.getElementById("startScreen");
+        const startButton = document.getElementById("startButton");
+        const submitExam = document.getElementById("submitExam");
+        let currentIndex = 0;
+        let interval;
+        function showImage(index) {
+          imgElement.src = images[index];
+        }
+        function startExam() {
+          document.getElementById("startScreen").style.display = "none";
+          document.getElementById("exam-image").style.display = "block";
+          document.getElementById("finished-screen").style.display = "none";
+          currentIndex = 0;
+          showImage(currentIndex);
+          interval = setInterval(() => {
+            currentIndex++;
+            if (currentIndex < images.length) {
+              showImage(currentIndex);
+            } else {
+              clearInterval(interval);
+              imgElement.style.display = "none";
+              finishedScreen.style.display = "flex";
+              setTimeout(() => {
+                document.getElementById("examForm").submit();
+              }, displayTime);
+            }
+          }, displayTime);
+        }
+        startButton.addEventListener("click", startExam);
+      </script>
     </div>
-    <script>
-      const images = [
-        "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg",
-        "https://cdn.britannica.com/92/100692-050-5B69B59B/Mallard.jpg",
-        "https://hips.hearstapps.com/hmg-prod/images/four-ducklings-on-grass-royalty-free-image-1732103736.jpg?crop=0.670xw:1.00xh;0.0830xw,0&resize=640:*",
-        "https://www.ducks.ca/assets/2022/04/20200316_duckling2-small-1000x678-c-default.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg"
-      ];
-      const displayTime = 3000; 
-      const imgElement = document.getElementById("exam-image");
-      const finishedScreen = document.getElementById("finished-screen");
-      const startScrcingueen = document.getElementById("startScreen");
-      const startButton = document.getElementById("startButton");
-      const submitExam = document.getElementById("submitExam");
-      let currentIndex = 0;
-      let interval;
-      function showImage(index) {
-        imgElement.src = images[index];
-      }
-      function startExam() {
-        document.getElementById("startScreen").style.display = "none";
-        document.getElementById("exam-image").style.display = "block";
-        document.getElementById("finished-screen").style.display = "none";
-        currentIndex = 0;
-        showImage(currentIndex);
-        interval = setInterval(() => {
-          currentIndex++;
-          if (currentIndex < images.length) {
-            showImage(currentIndex);
-          } else {
-            clearInterval(interval);
-            imgElement.style.display = "none";
-            finishedScreen.style.display = "flex";
-            setTimeout(() => {
-              submitExam.click();
-            }, displayTime);
-          }
-        }, displayTime);
-      }
-      startButton.addEventListener("click", startExam);
-    </script>
   </div>
-</div>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-// PASSWORD FUNCTION
+  <script>
+//lines 316-354 are just for small ux improvements
+// this is to focus/select the input field when it appears/the previous has been filled properly so you don't need to use the mouse as much ideally. possibly not safari compatible but wtv
+  window.addEventListener("load", () => {
+  const pwInput = document.getElementById("passwordInput");
+  if (pwInput) pwInput.focus();
+    const passwordBtn = document.getElementById("password_val_Button");
+    passwordBtn.addEventListener("click", () => {
+      // Delay slightly so the userStep finishes becoming visible
+      setTimeout(() => {
+        const initialsBox = document.getElementById("initialsInput");
+        if (initialsBox) initialsBox.focus();
+      }, 50);
+    });
+    document.getElementById("initialsInput").addEventListener("input", e => {
+      if (e.target.value.length === 2) {
+        document.getElementById("phoneInput").focus();
+      }
+    });
+    document.getElementById("phoneInput").addEventListener("input", e => {
+      if (e.target.value.length === 4) {
+        document.getElementById("dobInput").focus();
+      }
+    });
+  });
+  // being able to "click" the validate button with enter (instead of having to tab to the button + enter/having to click the button w/ mouse) --> for pw + username
+    document.getElementById("passwordInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("password_val_Button").click();
+        }
+      });
+    ["initialsInput", "phoneInput", "dobInput"].forEach(id => {
+      document.getElementById(id).addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("username_val_Button").click();
+        }
+      });
+    });
+
+  // STEP 1: PASSWORD VALIDATION
     const correctPassword = "cingulategyrus";
-    let passwordCorrect = false;
-    while (!passwordCorrect) {
-      const input = prompt("Please enter the password given during the Zoom to access this page:");
-      if (input === null) {
-        alert("Access cancelled");
-        window.location.href = "error_page.html";
+    document.getElementById("password_val_Button").addEventListener("click", () => {
+      const password = document.getElementById("passwordInput").value.trim();
+      if (password.toLowerCase() !== correctPassword) {
+        alert("Access denied: wrong password.");
         return;
       }
-      if (input.trim().toLowerCase() === correctPassword) {
-        passwordCorrect = true;
-        document.body.style.display = "block";
-      } else {
-        alert("Access denied: wrong password — please try again.");
+      // Password correct → hide password input, show user info inputs
+      document.getElementById("passwordStep").style.display = "none";
+      document.getElementById("userStep").style.display = "flex";
+    });
+
+  // STEP 2: USER INFO VALIDATION
+    document.getElementById("username_val_Button").addEventListener("click", () => {
+      const initials = document.getElementById("initialsInput").value.trim().toUpperCase();
+      const phone = document.getElementById("phoneInput").value.trim();
+      const dob = document.getElementById("dobInput").value.trim();
+
+      if (!/^[A-Z]{2}$/.test(initials)) {
+        alert("Invalid initials. Enter exactly 2 letters.");
+        return;
       }
-    }
-// (hopefully unique enough) USER ID CREATION FUNCTION
-    let userID = "";
-    while (true) {
-      const initials = prompt("Enter your 2 initials (AB format):")?.trim().toUpperCase();
-      const phone = prompt("Enter the last 4 digits of your phone number (#### format):")?.trim();
-      const dob = prompt("Enter your month and year of birth (MMYYYY format):")?.trim();
-      if (!initials || initials.length !== 2) {
-        alert("Invalid initials. Please enter exactly 2 letters (AB format).");
-        continue;
+      if (!/^\d{4}$/.test(phone)) {
+        alert("Invalid phone number. Enter exactly 4 digits.");
+        return;
       }
-      if (!phone || !/^\d{4}$/.test(phone)) {
-        alert("Invalid phone number. Please enter exactly 4 digits (#### format).");
-        continue;
+      if (!/^\d{6}$/.test(dob)) {
+        alert("Invalid date of birth. Enter 6 digits (MMYYYY).");
+        return;
       }
-      if (!dob || !/^\d{6}$/.test(dob)) {
-        alert("Invalid date of birth. Please enter exactly 6 digits (MMYYYY format).");
-        continue;
-      }
-      userID = `${initials}${phone}${dob}`;
-      console.log("Generated userID:", userID);
+      const userID = `${initials}${phone}${dob}`;
       localStorage.setItem("userID", userID);
-      break;
-    }
-  });
-</script>
+      console.log("Generated userID:", userID);
+      // Hide overlay and show main exam content
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      document.getElementById("startScreen").style.display = "flex";
+      if (document.getElementById("loginOverlay").style.display === "none") {
+      alignStickyRight();
+      }
+    });
+  </script>
+</div>
 <!-- FOOTER -->
 <footer>
   <h3>© 2025 MSS Anatomy Club</h3>
@@ -318,4 +417,6 @@
   window.addEventListener('resize', alignStickyRight);
 </script>
 </body>
+<!-- BODY ENDS -->
+
 </html>   
