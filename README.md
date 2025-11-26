@@ -24,7 +24,7 @@ MSS Anatomy Club mock bellringer platform
     - 3.2 (original): image display is the right half of the screen + header sticks to the top (modifiable, aesthetic choice)
     - 3.2-horizontal: image fills up the entire width of the screen, ~66% height and below is a scrollable answer input section + header stays on the top, not sticky so you can scroll down and make it disappear to have a bigger image display.
     - if wanted, we could also change the proportions of 3.2 so the image is on the right, but can take 60-70% of the screen's width instead of 50%--if we reduce the space that the questions take up on the left
-- *[] [NEXT BIG UPDATE PLANNED, probably Jan/Feb 2026] 3.3 --> user additional question management system
+- *[ ] [NEXT BIG UPDATE PLANNED, probably Jan/Feb 2026] 3.3 --> user additional question management system
   - want an integrate real-time collaborative question board where ppl can write in questions, see which other questions have been asked (grouped per station/question) + see the written ansewr or checkmark if the question was adressed orally. probably hae to use firestore (or similar thing) to do it. can wait a bit later
   - kinda miro board but no subscription service required, and integrated into the website and allows users to see their own answer input on the side (probably not the cadaveric images tho)
   - should allow for an easier time managing the MAC question periods
