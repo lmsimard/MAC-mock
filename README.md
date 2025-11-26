@@ -4,7 +4,6 @@ MSS Anatomy Club mock bellringer platform
 ## version hx:
 - versions 1 and 2 were two v different basic drafts, have been discarded
 - 3.1 --> shown during 2025-10-20 MAC tech meeting
-    new functions:
     - overall layout
     - timed image sequence display
     - answer input
@@ -12,7 +11,6 @@ MSS Anatomy Club mock bellringer platform
     - display of corrected answers to user
     other details: was hosted on Nelify but w/ modifications in early November, Netlify credits were maxed out :(
 - 3.2 --> next functional version, got it to work on 2025-11-26
-    new functions:
     - password for restricting access
     - username collection (based on 2 initials + last 4 numbers of cell phone + month and year of birth -> AB-1234-012025) --> can be fine-tuned to make sure it's unique later if we want?
     - answers entered are sent to a google sheets file that appends it as a new row with associated timestamp and created username
