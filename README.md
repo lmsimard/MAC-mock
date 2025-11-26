@@ -18,6 +18,7 @@ MSS Anatomy Club mock bellringer platform
     - answers entered are sent to a google sheets file that appends it as a new row with associated timestamp and created username
         -  Google Sheets: https://docs.google.com/spreadsheets/d/1g1EtjZEZH0Ahy_srABgM08HI03PrPXroFNoO58UzDMs/edit?usp=sharing
         -  Google Apps Script: https://script.google.com/u/0/home/projects/1h9ttBdesndFEIzF3MqAOlNJGBzVG3musUeFiYZAywFjOh3ZZpMOm6ySJ/edit (version used: 1126PM_2)
+    - other minor UX improvements (e.g., flow of field selection/form sending for inputs of the password and username info entries)
 - 3.3 --> want to add a field to send questions to ppl on the zoom (before exam review starts, so we can organize that a bit)
 - 3.3V (original, img display is the right half of the screen) and 3.3H (img fills up the entire width of the screen, ~75% height and below is a scrollable answer input sectino). have both versions running to then compare and pick one
 
