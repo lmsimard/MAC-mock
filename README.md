@@ -4,7 +4,7 @@ MSS Anatomy Club mock bellringer platform
 ## version hx:
 - versions 1 and 2 were two v different basic drafts, have been discarded
 - 3.1 --> shown during 2025-10-20 MAC tech meeting
-    - overall layout
+    - set up the overall layout
     - timed image sequence display
     - answer input
     - answer correction
