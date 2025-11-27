@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Exam Results</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      min-height: 100vh;
+    }
+    .line {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      margin: 5px 0;
+    }
+    .correct { color: rgb(0, 133, 0); font-weight: bold; }
+    .incorrect { color: rgb(159, 0, 27); font-weight: bold; }
+    .black {color: black}
+    .header-container {
+      padding-top: 16px; /* adjust for white space above header */
+    }
+    .results-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 85%;
+      margin-left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+      <header>
+        <div class = "header_logo">
+            <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width = 80px>
+        </div>
+        <div class="header_title">
+            <h1>MAC Mock Bellringer - Results</h1>
+            <h3><i>version 3.2-horizontal</i></h3>
+        </div>
+    </header>
+  </div>
+
+  <div class="results-container">
+    <div id="results"></div>
+    <p id="score"></p>
+  </div>
+
+  <script>
+    const userID = localStorage.getItem("userID") || "unknown_user";
+    // THIS IS THE PLACE FOR INPUT OF CORRECT ANSWERS. Case insensitive correction. 
+    const correctAnswers = {
+      Q01: "medial umbilical ligament",
+      Q02: ["monday", "mon", "carré lombaire", "quadratus lumborum"],
+      Q03: "tuesday",
+      Q04: "wednesday",
+      Q05: "thursday",
+      Q06: "friday",
+      Q07: "a",
+      Q08: "A",
+      Q09: "b",
+      Q10: "B",
+      Q11: "c c c c c c",
+      Q12: "C c",
+      Q13: "",
+      Q14: "$pec*al ch@r#cters",
+      Q15: "*7452o5434",
+      Q16: ["duckssssssss", "multiple ducks"],
+      Q17: "ducksssssss",
+      Q18: "duckssssss",
+      Q19: "ducksssss",
+      Q20: "duckssss",
+      Q21: "ducksss",
+      Q22: "duckss",
+      Q23: "ducks",
+      Q24: "duck"
+    };
+const urlParams = new URLSearchParams(window.location.search);
+const answers = {};
+let score=0;
+urlParams.forEach((value,name)=>{
+  answers[name]=value.trim();
+  let accepted = correctAnswers[name];
+  if(!accepted) accepted=[];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted = accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  if(accepted.includes(value.trim().toLowerCase())) score++;
+});
+const resultsList = document.getElementById("results");
+Object.entries(answers).forEach(([name,value])=>{
+  const p=document.createElement("p");
+  let accepted = correctAnswers[name] || [];
+  if(typeof accepted==="string") accepted=[accepted];
+  accepted=accepted.map(a=>a.trim().toLowerCase()).filter(a=>a!=="");
+  const isCorrect = accepted.includes(value.trim().toLowerCase());
+  if(isCorrect) p.innerHTML=`${name}: ${value} <span class="correct">✔ Correct</span>`;
+  else if(accepted.length===0) p.innerHTML=`${name}: ${value} <span>(no correct answer stored)</span>`;
+  else p.innerHTML=`${name}: ${value} <span class="incorrect">✘ Incorrect</span> (accepted: ${accepted.join(" OR ")})`;
+  resultsList.appendChild(p);
+});
+document.getElementById("score").textContent=`Your final Score is ${score} / ${Object.keys(answers).length}. Thank you for completing this mock bellringer and good luck on your exam! :))`;
+
+console.log("📤 Sending results to Google Apps Script…");
+
+// 1) Ensure Q01–Q24 exist and fill missing answers
+for (let i = 1; i <= 24; i++) { // HERE IT'S 24 BC OF THE NUMBER OF QUESTIONS IN THE MOCK EXAM
+  const key = "Q" + String(i).padStart(2, "0");
+  if (!answers.hasOwnProperty(key) || answers[key].trim() === "") {
+    answers[key] = "NONE ENTERED";
+  }
+}
+
+// 2) Now encode AFTER fixing empty answers
+const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
+
+// 3) NOW construct the URL
+const url =
+  "https://script.google.com/macros/s/AKfycbzEuIrKlO3b_7KICEDIGxKFIii28dMV5AegHHHQYEOdQlkKBS19NGFhrDAGNxgJVaeS_A/exec" +
+  `?userID=${encodeURIComponent(userID)}` +
+  `&score=${encodeURIComponent(score)}` +
+  `&answers=${encodedAnswers}`;
+
+// 4) Send to Google Apps Script (which will send to the Google Sheets https://docs.google.com/spreadsheets/d/1g1EtjZEZH0Ahy_srABgM08HI03PrPXroFNoO58UzDMs/edit?usp=sharing)
+fetch(url, { method: "GET" })
+  .then(res => res.text())
+  .then(txt => console.log("Response:", txt))
+  .catch(err => console.error(err));
+
+</script>
+
+<!-- make sure to have a full reload if you revisit the page -->
+<script>
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+window.addEventListener('load', () => {
+  alignStickyRight();
+});
+window.addEventListener('resize', alignStickyRight);
+
+</script>
+
+
+  <a href="index.html"><small>Back to mock exam</small></a>
+  <footer>
+    <h3>© 2025 MSS Anatomy Club</h3>
+    <h3>contact [add email?] for bugs/questions/suggestions</h3>
+  </footer>
+</body>
+</html>
