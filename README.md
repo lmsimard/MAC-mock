@@ -21,6 +21,7 @@ MSS Anatomy Club mock bellringer platform
             - when/if you refresh after submitting answers and sending them to the spreadsheet, the data row is written again (but w/ new timestamp). We do get a timestamp down to the second for each row so can sort it out manually later ig
         -  Google Apps Script: https://script.google.com/u/0/home/projects/1h9ttBdesndFEIzF3MqAOlNJGBzVG3musUeFiYZAywFjOh3ZZpMOm6ySJ/edit (version used: 1126PM_2)
     - other minor UX improvements (e.g., flow of field selection/form sending for inputs of the password and username info entries)
+    - POTENTIAL CONCERNS: usernames aren't necessarily unique if two ppl have the same initials, last 4 digits of phone number, and month/year of birth. can add a category later to reduce chances of duplicates
 - *[x] [2025-11-26] 3.2-horizontal so we can compare it to 3.2 normal (original/vertical)
     - 3.2 (original): image display is the right half of the screen + header sticks to the top (modifiable, aesthetic choice)
     - 3.2-horizontal: image fills up the entire width of the screen, ~66% height and below is a scrollable answer input section + header stays on the top, not sticky so you can scroll down and make it disappear to have a bigger image display.
