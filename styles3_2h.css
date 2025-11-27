@@ -1,0 +1,250 @@
+/* 0A) BASIC*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 0B) GENERAL STYLES */
+h1 {
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "SOFT" 0,
+    "WONK" 0;   
+  color:white;
+}
+h2, h3 {
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "SOFT" 0,
+    "WONK" 0;   
+  color:white;
+}
+h4, h5, body, p{
+  font-family: "Inter", sans-serif;
+  line-height: 18pt;
+}
+body {
+    display: flex;
+    padding-top: 0 !important;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    min-height: 100vh;
+    margin: 0;
+}
+.line {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  margin: 5px 0;
+}
+.red { 
+  color: red; 
+}
+.blue { 
+  color: rgb(46, 118, 218); 
+}
+/* 1) HEADER (simple sticky display (for now))*/
+header {
+  position: static;
+  margin-top: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgb(17, 120, 154);
+  z-index: 999;
+}
+
+.header_logo {
+    display: flex;
+    align-items: center; 
+}
+.header_title {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+img.MAC_logo {
+  border-radius: 50%;
+}
+
+/* TO UPDATE, SECTION TO FORMAT PASSWORD/USERNAME INFO */
+
+.validate_button {
+  border-radius: 8px;
+  text-align: center;
+  padding: 8px;
+  width: 40%;
+  cursor: pointer;
+  background: rgb(204, 204, 204);
+  border-color: black;
+}
+/* 2) MOCK EXAM BASIC STRUCTURE */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+    border: 5px solid rgb(17, 120, 154);
+    width: 100%;
+}
+/* 3A) FORM/FILLABLE SECTION */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 85%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+form input {
+  width: 100%
+}
+form button {
+  border-radius: 8px;
+  text-align: left;
+  padding: 8px;
+  width: 40%;
+  cursor: pointer;
+  background: rgb(204, 204, 204);
+  border-color: black;
+}
+/* 3B) IMAGE SEQUENCE - runs automatically*/
+.grid-child.green {
+  position: sticky ;              
+  align-self: start;
+  overflow: auto;              
+  box-sizing: border-box;
+  background: rgb(255, 255, 255); 
+  padding: 10px;
+  display: flex;            
+  flex-direction: column;
+  align-items: center;        
+} 
+.start_button {
+  border-radius: 8px;
+  text-align: center;
+  padding: 8px;
+  width: 40%;
+  cursor: pointer;
+  background: rgb(204, 204, 204);
+  border-color: black;
+}
+.start_instructions_in_green_column {
+  margin-left: 16px;
+  margin-right: 16px;
+  text-align: center;
+}
+.end_instructions_in_green_column {
+  margin-left: 16px;
+  margin-right: 16px;
+  text-align: center;
+  color: black;
+}
+
+.exam-container {
+  top: 120px;                  
+  align-self: start;
+  box-sizing: border-box;
+  background: rgb(255, 255, 255); 
+  padding: 10px;
+  display: flex;         
+  flex-direction: column;
+  vertical-align: middle;
+  align-items: center;    
+}
+
+#startScreen {
+  width: 100%;
+  aspect-ratio: 15/11.7;    
+  border-radius: 12px;
+  box-shadow: 0 0px 10px -3px rgba(0, 0, 0, 0.5);
+  background: #ffffff;
+  margin: 0 auto 20px auto;
+  display: flex;  /*looks like this property is overwritten by smth in the pw/username screen hiding fx at the beginning, leaving it here just in case ig */
+  vertical-align: middle;
+  flex-direction: column;       
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.start_instructions_in_green_column {
+  padding: 0 16px;
+  line-height: 1.4;
+}
+
+#exam-image {
+  width: 43vw;
+  aspect-ratio: 15/11.7; 
+  align-items: center;
+  border-radius: 12px;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 0px 10px -3px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  display: none;
+}
+#finished-screen {
+  width: 43vw;             
+  aspect-ratio: 15/11.7;    
+  border-radius: 12px;
+  box-shadow: 0 0px 10px -3px rgba(0, 0, 0, 0.5);
+  background: #ffffff;
+  margin: 0 auto 20px auto;    
+  vertical-align: middle;
+  display: none; 
+  justify-content: center; 
+  align-items: center;       
+  text-align: center;
+}
+/* 4) FOOTER */
+footer {
+  bottom: 0;
+  padding: 10px;
+  background: rgb(17, 120, 154);
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+
+
+
+/* NEW for the horiz version*/
+
+.exam-container-fullwidth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#exam-image {
+  width: 100%;
+  height: 77vh; 
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 0px 10px -3px rgba(0,0,0,0.5);
+  margin-bottom: 16px;
+}
+
+.exam-form-container {
+  width: 90%;
+  max-height: 18vh;
+  overflow-y: auto; /* makes form scrollable */
+  padding: 16px;
+  box-sizing: border-box;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0px 10px -3px rgba(0,0,0,0.2);
+}
