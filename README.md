@@ -18,6 +18,7 @@ MSS Anatomy Club mock bellringer platform
     - username collection (based on 2 initials + last 4 numbers of cell phone + month and year of birth -> AB-1234-012025) --> can be fine-tuned to make sure it's unique later if we want?
     - answers entered are sent to a google sheets file that appends it as a new row with associated timestamp and created username
         -  Google Sheets: https://docs.google.com/spreadsheets/d/1g1EtjZEZH0Ahy_srABgM08HI03PrPXroFNoO58UzDMs/edit?usp=sharing
+            - when/if you refresh after submitting answers and sending them to the spreadsheet, the data row is written again (but w/ new timestamp). We do get a timestamp down to the second for each row so can sort it out manually later ig
         -  Google Apps Script: https://script.google.com/u/0/home/projects/1h9ttBdesndFEIzF3MqAOlNJGBzVG3musUeFiYZAywFjOh3ZZpMOm6ySJ/edit (version used: 1126PM_2)
     - other minor UX improvements (e.g., flow of field selection/form sending for inputs of the password and username info entries)
 - *[x] [2025-11-26] 3.2-horizontal so we can compare it to 3.2 normal (original/vertical)
