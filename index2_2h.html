@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAC Mock Bellringer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <style>
+    #mainContent { display: none; }
+    .exam-container-fullwidth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    #exam-image {
+      width: 100%;
+      height: 77vh;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0px 10px -3px rgba(0,0,0,0.5);
+      margin-bottom: 16px;
+      display: none;
+    }
+    .exam-form-container {
+      width: 100%;
+      max-height: 18vh;
+      overflow-y: auto;
+      padding: 16px;
+      box-sizing: border-box;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 0px 10px -3px rgba(0,0,0,0.2);
+    }
+    #startScreen, #finished-screen {
+      width: 100%;
+      height: 77vh;
+      border-radius: 12px;
+      box-shadow: 0 0px 10px -3px rgba(0,0,0,0.5);
+      background: #ffffff;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
+      gap: 16px;
+    }
+    #finished-screen { display: none; }
+  </style>
+</head>
+
+<body>
+  <!-- PASSWORD & USER INFO OVERLAY -->
+  <div id="loginOverlay">
+    <div id="passwordStep" style="position: fixed; top:0; left:0; width:100vw; height:100vh; background-color:#11789a; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+      <h1>MAC Mock Bellringer</h1><br><br><br>
+      <h2>Enter the password provided during the Zoom to access the exam.</h2><br>
+      <input type="password" id="passwordInput" placeholder="Password"><br>
+      <button id="password_val_Button" class="validate_button" type="button"><p><strong> VALIDATE AND CONTINUE </strong></p></button>
+    </div>
+
+<div id="userStep" style="position: fixed; top:0; left:0; width:100vw; height:100vh; background-color:#11789a; display:none; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+  <h1>MAC Mock Bellringer</h1><br><br><br>
+  <h2>Enter your user information.</h2><br>
+  <input type="text" id="initialsInput" placeholder="Initials (AB)" maxlength="2">
+  <input type="text" id="phoneInput" placeholder="Last 4 digits of phone" maxlength="4">
+  <input type="text" id="dobInput" placeholder="Birth MMYYYY" maxlength="6"><br>
+  <button id="username_val_Button" class="validate_button" type="button"><p><strong> VALIDATE AND CONTINUE </strong></p></button>
+</div>
+
+  </div>
+  <header>
+      <div class="header_logo">
+        <img class="image MAC_logo" src="https://mcgillmed.com/wp-content/uploads/2021/09/118430924_622964418363620_8411873638485144001_n.png" alt="MSS Anatomy Club Logo" width="80px">
+      </div>
+      <div class="header_title">
+        <h1>MAC Mock Bellringer</h1>
+        <h3><i>version 3.2-horizontal</i></h3>
+      </div>
+    </header>
+
+  <div id="mainContent">
+
+<!-- EXAM CONTAINER -->
+<div class="exam-container-fullwidth">
+  <div id="startScreen">
+    <p class="start_instructions_in_green_column">Click the button below to begin the test. No pause is possible after starting.</p>
+    <button id="startButton" class="start_button" type="button"><p><strong>START</strong></p></button>
+  </div>
+
+  <img id="exam-image" src="" alt="Exam Image">
+
+  <div id="finished-screen">
+    <p class="end_instructions_in_green_column">
+      ✅ Exam Finished: <br><br> This screen will remain for 60 seconds. Then, if you haven't clicked submit yet, the form will automatically be submitted.
+    </p>
+  </div>
+
+  <div class="exam-form-container">
+    <form id="examForm" action="results.html" method="GET">
+      <!-- QUESTIONS -->
+      <div>
+        <h4>Station 1</h4>
+        <label for="Q01" class="line red">1. Identify the landmark indicated by the pin.</label><br>
+        <input name="Q01" id="Q01" type="text"><br>
+        <label for="Q02" class="line blue">2. Identify the neurovascular structure indicated by the pin.</label><br>
+        <input name="Q02" id="Q02" type="text"><br>
+      </div>
+       <div>
+            <h4>Station 2</h4>
+            <div>
+              <label for="Q03" class= "line red">3. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q03" id="Q03" type="text">
+            </div>
+            <div>
+              <label for="Q04" class= "line blue">4. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q04" id="Q04" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 3</h4>
+            <div>
+              <label for="Q05" class= "line red">5. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q05" id="Q05" type="text">
+            </div>
+            <div>
+              <label for="Q06" class= "line blue">6. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q06" id="Q06" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 4</h4>
+            <div>
+              <label for="Q07" class= "line red">7. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q07" id="Q07" type="text">
+            </div>
+            <div>
+              <label for="Q08" class= "line blue">8. Identify the neurovascular structure indicated by the pin.</label>
+              <br>
+              <input name="Q08" id="Q08" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 5</h4>
+            <div>
+              <label for="Q09" class= "line red">9. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q09" id="Q09" type="text">
+            </div>
+            <div>
+              <label for="Q10" class= "line blue">10. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q10" id="Q10" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 6</h4>
+            <div>
+              <label for="Q11" class= "line red">11. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q11" id="Q11" type="text">
+            </div>
+            <div>
+              <label for="Q12" class= "line blue">12. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q12" id="Q12" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 7</h4>
+            <div>
+              <label for="Q13" class= "line red">13. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q13" id="Q13" type="text">
+            </div>
+            <div>
+              <label for="Q14" class= "line blue">14. Identify the neurovascular structure indicated by the pin.</label>
+              <br>
+              <input name="Q14" id="Q14" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 8</h4>
+            <div>
+              <label for="Q15" class= "line red">15. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q15" id="Q15" type="text">
+            </div>
+            <div>
+              <label for="Q16" class= "line blue">16. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q16" id="Q16" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 9</h4>
+            <div>
+              <label for="Q17" class= "line red">17. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q17" id="Q17" type="text">
+            </div>
+            <div>
+              <label for="Q18" class= "line blue">18. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q18" id="Q18" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 10</h4>
+            <div>
+              <label for="Q19" class= "line red">19. Identify the landmark indicated by the pin.</label>
+              <br>
+              <input name="Q19" id="Q19" type="text">
+              </div>
+              <div>
+                <label for="Q20" class= "line blue">20. Identify the neurovascular structure indicated by the pin.</label>
+                <br>
+                <input name="Q20" id="Q20" type="text">
+              </div>
+          </div>
+          <div>
+            <h4>Station 11</h4>
+            <div>
+              <label for="Q21" class= "line red">21. Identify the structure indicated by the pin (be specific).</label>
+              <br>
+              <input name="Q21" id="Q21" type="text">
+            </div>
+            <div>
+              <label for="Q22" class= "line blue">22. What is the embryological origin of the structure indicated by the pin?</label>
+              <br>
+              <input name="Q22" id="Q22" type="text">
+            </div>
+          </div>
+          <div>
+            <h4>Station 12</h4>
+            <div>
+              <label for="Q23" class= "line red">23. Identify the bony structure indicated by the pin.</label>
+              <br>
+              <input name="Q23" id="Q23" type="text">
+            </div>
+            <div>
+              <label for="Q24" class= "line blue">24. Identify the landmarked indicated by the pin.</label>
+              <br>
+              <input name="Q24" id="Q24" type="text">
+            </div> 
+          </div>
+        </div>
+        <br>
+      <button id="submitExam" type="submit">
+        <p><strong>- End</strong> the mock exam + <strong>correct</strong> your answers -</p>
+      </button>
+    </form>
+  </div>
+</div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <h3>© 2025 MSS Anatomy Club</h3>
+    <h3>contact [add email?] for bugs/questions/suggestions</h3>
+  </footer>
+
+  <!-- JS -->
+
+  <script>
+    const images = [
+      "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg",
+      "https://cdn.britannica.com/92/100692-050-5B69B59B/Mallard.jpg",
+      "https://hips.hearstapps.com/hmg-prod/images/four-ducklings-on-grass-royalty-free-image-1732103736.jpg?crop=0.670xw:1.00xh;0.0830xw,0&resize=640:*",
+      "https://www.ducks.ca/assets/2022/04/20200316_duckling2-small-1000x678-c-default.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bucephala-albeola-010.jpg"
+    ];
+    const displayTime = 3000; 
+    const imgElement = document.getElementById("exam-image");
+    const finishedScreen = document.getElementById("finished-screen");
+    const startScreen = document.getElementById("startScreen");
+    const startButton = document.getElementById("startButton");
+    let currentIndex = 0;
+    let interval;
+
+    function showImage(index) { 
+      imgElement.src = images[index]; 
+      imgElement.style.width = "100%";
+      imgElement.style.height = "66vh";
+      imgElement.style.display = "block";
+    }
+
+    function startExam() {
+      startScreen.style.display = "none";
+      imgElement.style.display = "block";
+      finishedScreen.style.display = "none";
+      currentIndex = 0;
+      showImage(currentIndex);
+
+      interval = setInterval(() => {
+        currentIndex++;
+        if (currentIndex < images.length) {
+          showImage(currentIndex);
+        } else {
+          clearInterval(interval);
+          imgElement.style.display = "none";
+          finishedScreen.style.display = "flex";
+          setTimeout(() => {
+            document.getElementById("examForm").submit();
+          }, displayTime);
+        }
+      }, displayTime);
+    }
+
+    startButton.addEventListener("click", startExam);
+
+    // UX: focus inputs
+    window.addEventListener("load", () => {
+      const pwInput = document.getElementById("passwordInput");
+      if (pwInput) pwInput.focus();
+      const passwordBtn = document.getElementById("password_val_Button");
+      passwordBtn.addEventListener("click", () => {
+        setTimeout(() => {
+          const initialsBox = document.getElementById("initialsInput");
+          if (initialsBox) initialsBox.focus();
+        }, 50);
+      });
+      document.getElementById("initialsInput").addEventListener("input", e => {
+        if (e.target.value.length === 2) document.getElementById("phoneInput").focus();
+      });
+      document.getElementById("phoneInput").addEventListener("input", e => {
+        if (e.target.value.length === 4) document.getElementById("dobInput").focus();
+      });
+    });
+
+    ["passwordInput"].forEach(id => {
+      document.getElementById(id).addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("password_val_Button").click();
+        }
+      });
+    });
+
+    ["initialsInput","phoneInput","dobInput"].forEach(id => {
+      document.getElementById(id).addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("username_val_Button").click();
+        }
+      });
+    });
+
+    // Password validation
+    const correctPassword = "cingulate";
+    document.getElementById("password_val_Button").addEventListener("click", () => {
+      const password = document.getElementById("passwordInput").value.trim();
+      if (password.toLowerCase() !== correctPassword) {
+        alert("Access denied: wrong password."); return;
+      }
+      document.getElementById("passwordStep").style.display = "none";
+      document.getElementById("userStep").style.display = "flex";
+    });
+
+    // User info validation
+    document.getElementById("username_val_Button").addEventListener("click", () => {
+      const initials = document.getElementById("initialsInput").value.trim().toUpperCase();
+      const phone = document.getElementById("phoneInput").value.trim();
+      const dob = document.getElementById("dobInput").value.trim();
+      if (!/^[A-Z]{2}$/.test(initials)) { alert("Invalid initials. Enter exactly 2 letters."); return; }
+      if (!/^\d{4}$/.test(phone)) { alert("Invalid phone number. Enter exactly 4 digits."); return; }
+      if (!/^\d{6}$/.test(dob)) { alert("Invalid date of birth. Enter 6 digits (MMYYYY)."); return; }
+      const userID = `${initials}${phone}${dob}`;
+      localStorage.setItem("userID", userID);
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      document.getElementById("startScreen").style.display = "flex";
+    });
+  </script>
+
+  <script>
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    });
+    window.addEventListener('load', () => {
+      alignStickyRight();
+    });
+    window.addEventListener('resize', alignStickyRight);
+
+  </script>
+
+
+</body>
+</html>
